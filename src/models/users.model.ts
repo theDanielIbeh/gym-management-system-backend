@@ -8,6 +8,13 @@ const Roles = {
   Superadmin: 'Superadmin',
 };
 
+const SubscriptionType = {
+  Platinum: 'Platinum', // 12 months
+  Gold: 'Gold', // 6 months
+  Silver: 'Silver', // 3 months
+  Bronze: 'Bronze', // 1 month
+};
+
 const UserSchema: Schema = new Schema({
   email: {
     type: String,
@@ -24,6 +31,13 @@ const UserSchema: Schema = new Schema({
     required: true,
     default: Roles.User,
   },
+  branch: {
+    type: String,
+  },
+  subscription_type: {
+    type: String,
+    enum: Object.values(SubscriptionType),
+  }
 });
 
 export const UserModel = model<User & Document>('User', UserSchema);
