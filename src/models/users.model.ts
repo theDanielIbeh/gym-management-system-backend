@@ -1,14 +1,14 @@
 import { model, Schema, Document } from 'mongoose';
 import { User } from '@interfaces/users.interface';
 
-const Roles = {
+export const Roles = {
   User: 'User',
   Instructor: 'Instructor',
   Admin: 'Admin',
   Superadmin: 'Superadmin',
 };
 
-const SubscriptionType = {
+export const SubscriptionType = {
   Platinum: 'Platinum', // 12 months
   Gold: 'Gold', // 6 months
   Silver: 'Silver', // 3 months

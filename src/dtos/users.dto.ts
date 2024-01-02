@@ -1,4 +1,5 @@
-import { IsEmail, IsString, IsNotEmpty, MinLength, MaxLength } from 'class-validator';
+import { IsEmail, IsString, IsNotEmpty, MinLength, MaxLength, IsOptional, IsEnum } from 'class-validator';
+import { Roles, SubscriptionType } from "../models/users.model";
 
 export class CreateUserDto {
   @IsEmail()
@@ -9,6 +10,20 @@ export class CreateUserDto {
   @MinLength(9)
   @MaxLength(32)
   public password: string;
+
+  @IsString()
+  @IsOptional()
+  public branch: String;
+
+  @IsString()
+  @IsOptional()
+  @IsEnum(SubscriptionType)
+  public subscription_type: String
+
+  @IsString()
+  @IsNotEmpty()
+  @IsEnum(Roles)
+  public role: String
 }
 
 export class UpdateUserDto {
