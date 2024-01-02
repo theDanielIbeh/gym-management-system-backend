@@ -13,6 +13,8 @@ export const SubscriptionType = {
   Gold: 'Gold', // 6 months
   Silver: 'Silver', // 3 months
   Bronze: 'Bronze', // 1 month
+  Copper: 'Copper', // 2 weeks
+  Basic: 'Basic', // 1 week
 };
 
 const UserSchema: Schema = new Schema({
