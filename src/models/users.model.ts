@@ -4,6 +4,7 @@ import { User } from '@interfaces/users.interface';
 export const Roles = {
   User: 'User',
   Instructor: 'Instructor',
+  Staff: 'Staff',
   Admin: 'Admin',
   Superadmin: 'Superadmin',
 };
@@ -39,7 +40,7 @@ const UserSchema: Schema = new Schema({
   subscription_type: {
     type: String,
     enum: Object.values(SubscriptionType),
-  }
+  },
 });
 
 export const UserModel = model<User & Document>('User', UserSchema);

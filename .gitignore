@@ -1,8 +1,5 @@
 /node_modules
 /.vscode
-<<<<<<< Updated upstream
 src/logs/debug/*
 src/logs/error/*
-=======
 /src/logs/*
->>>>>>> Stashed changes
