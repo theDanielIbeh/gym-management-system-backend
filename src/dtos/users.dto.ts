@@ -21,7 +21,6 @@ export class CreateUserDto {
   public subscription_type: String;
 
   @IsString()
-  @IsNotEmpty()
   @IsEnum(Roles)
   public role: String;
 
@@ -36,7 +35,9 @@ export class UpdateUserDto {
   @MinLength(9)
   @MaxLength(32)
   public password: string;
+}
 
+export class AdminUpdateUserDto {
   @IsString()
   @IsOptional()
   public image: String;
@@ -45,4 +46,8 @@ export class UpdateUserDto {
   @IsOptional()
   @IsEnum(SubscriptionType)
   public subscription_type: String;
+
+  @IsString()
+  @IsOptional()
+  public branch: String;
 }
