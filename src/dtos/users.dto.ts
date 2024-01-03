@@ -21,6 +21,7 @@ export class CreateUserDto {
   public subscription_type: String;
 
   @IsString()
+  @IsOptional()
   @IsEnum(Roles)
   public role: String;
 
