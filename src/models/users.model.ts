@@ -34,6 +34,9 @@ const UserSchema: Schema = new Schema({
     required: true,
     default: Roles.User,
   },
+  image: {
+    type: String,
+  },
   branch: {
     type: String,
   },
