@@ -52,3 +52,19 @@ export class AdminUpdateUserDto {
   @IsOptional()
   public branch: String;
 }
+
+
+export class SuperAdminUpdateUserDto {
+  @IsString()
+  @IsOptional()
+  public image: String;
+
+  @IsString()
+  @IsOptional()
+  @IsEnum(SubscriptionType)
+  public subscription_type: String;
+
+  @IsString()
+  @IsOptional()
+  public branch: String;
+}
