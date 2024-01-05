@@ -53,7 +53,6 @@ export class AdminUpdateUserDto {
   public branch: String;
 }
 
-
 export class SuperAdminUpdateUserDto {
   @IsString()
   @IsOptional()
