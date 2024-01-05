@@ -20,11 +20,11 @@ export const SubscriptionType = {
 
 const UserSchema: Schema = new Schema({
   first_name: {
-    type: 'string',
+    type: String,
     required: true,
   },
   last_name: {
-    type: 'string',
+    type: String,
     required: true,
   },
   email: {
