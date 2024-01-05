@@ -1,11 +1,11 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '@config';
 import { HttpException } from '@exceptions/httpException';
 import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 import { UserModel } from '@models/users.model';
 
-const getAuthorization = (req) => {
+const getAuthorization = (req: Request): string | null => {
   const cookie = req.cookies['Authorization'];
   if (cookie) return cookie;
 
