@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class BranchRoute implements Routes {
-  public path = '/branchs';
+  public path = '/branch';
   public router = Router();
   public branch = new BranchController();
 
