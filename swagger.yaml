@@ -2,6 +2,9 @@ tags:
 - name: users
   description: users API
 
+- name: branches
+  description: branches API
+
 paths:
 # [GET] users
   /users:
@@ -100,6 +103,15 @@ paths:
         500:
           description: 'Server Error'
 
+
+# [GET]
+  /branch:
+    get:
+      tags:
+      - branches
+      summary: Find All branches
+      responses:
+
 # definitions
 definitions:
   users:
@@ -114,6 +126,13 @@ definitions:
       password:
         type: string
         description: user Password
+
+  branches:
+    type: object
+    required:
+      - name
+      - location
+
 
 schemes:
  - https
