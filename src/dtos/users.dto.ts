@@ -12,6 +12,18 @@ export class CreateUserDto {
   public password: string;
 
   @IsString()
+  @IsNotEmpty()
+  @MinLength(4)
+  @MaxLength(32)
+  public first_name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(4)
+  @MaxLength(32)
+  public last_name: string;
+
+  @IsString()
   @IsOptional()
   public branch: String;
 
