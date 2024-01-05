@@ -7,7 +7,7 @@ interface MyTokenPayload {
   role: string;
 }
 
-export const checkRole = (...roles) => {
+export const checkRole = (...roles: string[]) => {
   return (req: RequestWithUser, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(' ')[1];
 
