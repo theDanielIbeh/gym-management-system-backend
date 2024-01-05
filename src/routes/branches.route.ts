@@ -15,10 +15,10 @@ export class BranchRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.branch.getBranches);
-    this.router.get(`${this.path}/:id`, this.branch.getBranchById);
+    this.router.get(`${this.path}`, checkSuperAdminRole('Superadmin'), this.branch.getBranches);
+    this.router.get(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), this.branch.getBranchById);
     this.router.post(`${this.path}`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(CreateBranchDto), this.branch.createBranch);
-    this.router.put(`${this.path}/:id`, ValidationMiddleware(CreateBranchDto, true), this.branch.updateBranch);
-    this.router.delete(`${this.path}/:id`, this.branch.deleteBranch);
+    this.router.put(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(CreateBranchDto, true), this.branch.updateBranch);
+    this.router.delete(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), this.branch.deleteBranch);
   }
 }
