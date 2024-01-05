@@ -1,10 +1,9 @@
-import { User } from "./users.interface";
+import { User } from './users.interface';
 
 export interface Payment {
-    _id?: string;
-    payment_type: string;
-    amount: number;
-    date: Date;
-    payee: User
-  }
-  
+  _id?: string;
+  payment_type: string;
+  amount: number;
+  date: Date;
+  payee: User;
+}
