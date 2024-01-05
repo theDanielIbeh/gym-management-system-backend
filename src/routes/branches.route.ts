@@ -3,6 +3,7 @@ import { BranchController } from '@controllers/branches.controller';
 import { CreateBranchDto } from '@dtos/branches.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
+import { checkRole } from '@/middlewares/role.middleware';
 
 export class BranchRoute implements Routes {
   public path = '/branch';
@@ -16,7 +17,7 @@ export class BranchRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.branch.getBranches);
     this.router.get(`${this.path}/:id`, this.branch.getBranchById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateBranchDto), this.branch.createBranch);
+    this.router.post(`${this.path}`, checkRole('superadmin'), ValidationMiddleware(CreateBranchDto), this.branch.createBranch);
     this.router.put(`${this.path}/:id`, ValidationMiddleware(CreateBranchDto, true), this.branch.updateBranch);
     this.router.delete(`${this.path}/:id`, this.branch.deleteBranch);
   }
