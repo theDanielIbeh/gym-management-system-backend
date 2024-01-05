@@ -17,8 +17,8 @@ export class PaymentRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, checkRole('Superadmin', 'Admin'), this.payment.getPayments);
-    this.router.get(`${this.path}/:id`, this.payment.getPaymentById);
-    this.router.post(`${this.path}`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(CreatePaymentDto), this.payment.createPayment);
+    this.router.get(`${this.path}/:id`, checkRole('Superadmin', 'Admin'), this.payment.getPaymentById);
+    this.router.post(`${this.path}`, checkRole('Superadmin', 'Admin'), ValidationMiddleware(CreatePaymentDto), this.payment.createPayment);
     this.router.delete(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), this.payment.deletePayment);
   }
 }
