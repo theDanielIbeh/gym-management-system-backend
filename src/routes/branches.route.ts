@@ -3,7 +3,7 @@ import { BranchController } from '@controllers/branches.controller';
 import { CreateBranchDto } from '@dtos/branches.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { checkRole } from '@/middlewares/role.middleware';
+import { checkRole } from '@/middlewares/superadmin.middleware';
 
 export class BranchRoute implements Routes {
   public path = '/branch';

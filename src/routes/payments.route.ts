@@ -3,7 +3,7 @@ import { PaymentController } from '@controllers/payments.controller';
 import { CreatePaymentDto } from '@dtos/payments.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { checkRole } from '@/middlewares/role.middleware';
+import { checkRole } from '@/middlewares/superadmin.middleware';
 
 export class PaymentRoute implements Routes {
   public path = '/payment';
