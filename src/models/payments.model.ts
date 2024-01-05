@@ -3,7 +3,8 @@ import { Payment } from '@/interfaces/payments.interface';
 
 export const PaymentType = {
   Subscription: "Subscription",
-  Salary: "Salary"
+  Salary: "Salary",
+  Utility: "Utility",
 }
 const PaymentSchema: Schema = new Schema({
   payment_type: {
