@@ -10,7 +10,7 @@ export class BranchController {
     try {
       const findAllBranchsData: Branch[] = await this.branch.findAllBranches();
 
-      res.status(200).json({ data: findAllBranchsData, message: 'findAll' });
+      res.status(200).json({ data: findAllBranchsData, message: 'found All' });
     } catch (error) {
       next(error);
     }
@@ -21,7 +21,7 @@ export class BranchController {
       const branchId: string = req.params.id;
       const findOneBranchData: Branch = await this.branch.findBranchById(branchId);
 
-      res.status(200).json({ data: findOneBranchData, message: 'findOne' });
+      res.status(200).json({ data: findOneBranchData, message: 'found One' });
     } catch (error) {
       next(error);
     }
