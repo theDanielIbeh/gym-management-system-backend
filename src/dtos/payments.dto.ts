@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, MinLength, MaxLength, IsOptional, IsEnum, IsNumber, IsDate } from 'class-validator';
+import { IsString, IsNotEmpty, IsEnum, IsNumber } from 'class-validator';
 import { PaymentType } from '@/models/payments.model';
 
 export class CreatePaymentDto {
@@ -10,10 +10,6 @@ export class CreatePaymentDto {
   @IsNumber()
   @IsNotEmpty()
   public amount: number;
-
-  @IsDate()
-  @IsNotEmpty()
-  public date: Date;
 
   @IsString()
   @IsNotEmpty()
