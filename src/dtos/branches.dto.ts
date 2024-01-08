@@ -36,3 +36,9 @@ export class CreateBranchDto {
   @IsOptional()
   public equipment: string[];
 }
+
+export class AssignBranchDto {
+  @IsString()
+  @IsNotEmpty()
+  public admin: string;
+}
