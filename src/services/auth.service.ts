@@ -9,7 +9,7 @@ import { UserModel } from '@models/users.model';
 
 const createToken = (user: User): TokenData => {
   const dataStoredInToken: DataStoredInToken = { _id: user._id, role: user.role };
-  const expiresIn: number = 60 * 60;
+  const expiresIn: number = 60 * 60 * 3;
 
   return { expiresIn, token: sign(dataStoredInToken, SECRET_KEY, { expiresIn }), role: user.role };
 };
