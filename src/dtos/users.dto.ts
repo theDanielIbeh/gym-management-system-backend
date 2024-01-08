@@ -42,6 +42,17 @@ export class CreateUserDto {
   public image: String;
 }
 
+export class SignInDto {
+  @IsEmail()
+  public email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(7)
+  @MaxLength(32)
+  public password: string;
+}
+
 export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
