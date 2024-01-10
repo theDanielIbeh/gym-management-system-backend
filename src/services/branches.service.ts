@@ -61,6 +61,29 @@ export class BranchService {
     return updatedBranch;
   }
 
+  public async addStaffToBranch(branchId: string, userId: string): Promise<Branch> {
+    // Check if the user exists (and optionally check for appropriate role)
+    const user = await UserModel.findById(userId /*, { role: 'staff' } */);
+    if (!user) {
+      throw new HttpException(409, 'User does not exist');
+    }
+    if (user.role !== 'Staff') {
+      throw new HttpException(409, 'User is not a Staff Member');
+    }
+    // Append the user to the staff array of the branch
+    const updatedBranch: Branch = await BranchModel.findByIdAndUpdate(
+      branchId,
+      { $addToSet: { staff: userId } }, // This adds the staff member without duplicating if they're already in the array
+      { new: true },
+    ).populate('staff');
+
+    if (!updatedBranch) {
+      throw new HttpException(409, "Branch doesn't exist");
+    }
+
+    return updatedBranch;
+  }
+
   public async deleteBranch(branchId: string): Promise<Branch> {
     const deleteBranchById: Branch = await BranchModel.findByIdAndDelete(branchId);
     if (!deleteBranchById) throw new HttpException(409, "Branch doesn't exist");
