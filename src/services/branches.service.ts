@@ -7,7 +7,7 @@ import { UserModel } from '@/models/users.model';
 @Service()
 export class BranchService {
   public async findAllBranches(): Promise<Branch[]> {
-    const branchs: Branch[] = await BranchModel.find().populate('admin');
+    const branchs: Branch[] = await BranchModel.find().populate('admin').populate('staff');
     return branchs;
   }
 
