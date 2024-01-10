@@ -48,7 +48,7 @@ export class BranchService {
     }
 
     if (adminUser.role !== 'Admin') {
-      throw new HttpException(409, 'This User can not be  an Admin');
+      throw new HttpException(409, 'This User can not be an Admin');
     }
 
     // Update the branch with the new admin
