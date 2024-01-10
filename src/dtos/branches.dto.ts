@@ -42,3 +42,9 @@ export class AssignBranchDto {
   @IsNotEmpty()
   public admin: string;
 }
+
+export class AddStaffDto {
+  @IsString()
+  @IsNotEmpty()
+  public user_id: string;
+}
