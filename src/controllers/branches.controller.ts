@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
 import { Branch } from '@interfaces/branches.interface';
 import { BranchService } from '@services/branches.service';
-import { Admin } from '@/interfaces/users.interface';
-import { Types } from 'mongoose';
 import { AssignBranchDto } from '@/dtos/branches.dto';
 
 export class BranchController {
