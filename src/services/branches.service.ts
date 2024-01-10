@@ -2,16 +2,18 @@ import { Service } from 'typedi';
 import { HttpException } from '@exceptions/httpException';
 import { Branch } from '@interfaces/branches.interface';
 import { BranchModel } from '@models/branches.model';
+import { Types } from 'mongoose';
+import { UserModel } from '@/models/users.model';
 
 @Service()
 export class BranchService {
   public async findAllBranches(): Promise<Branch[]> {
-    const branchs: Branch[] = await BranchModel.find();
+    const branchs: Branch[] = await BranchModel.find().populate('admin');
     return branchs;
   }
 
   public async findBranchById(branchId: string): Promise<Branch> {
-    const findBranch: Branch = await BranchModel.findOne({ _id: branchId });
+    const findBranch: Branch = await BranchModel.findOne({ _id: branchId }).populate('admin');
     if (!findBranch) throw new HttpException(409, "Branch doesn't exist");
 
     return findBranch;
@@ -36,6 +38,28 @@ export class BranchService {
     if (!updateBranchById) throw new HttpException(409, "Branch doesn't exist");
 
     return updateBranchById;
+  }
+
+  public async assignAdminToBranch(branchId: string, adminUserId: string): Promise<Branch> {
+    // Check if the user exists and has an admin role
+    const adminUser = await UserModel.findOne({ _id: adminUserId });
+    console.log(adminUser);
+    if (!adminUser) {
+      throw new HttpException(409, 'User does not exist');
+    }
+
+    if (adminUser.role !== 'Admin') {
+      throw new HttpException(409, 'This User can not be  an Admin');
+    }
+
+    // Update the branch with the new admin
+    const updatedBranch: Branch = await BranchModel.findByIdAndUpdate(branchId, { admin: adminUserId }, { new: true }).populate('admin');
+
+    if (!updatedBranch) {
+      throw new HttpException(409, "Branch doesn't exist");
+    }
+
+    return updatedBranch;
   }
 
   public async deleteBranch(branchId: string): Promise<Branch> {
