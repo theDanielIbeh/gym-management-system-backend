@@ -2,7 +2,6 @@ import { Service } from 'typedi';
 import { HttpException } from '@exceptions/httpException';
 import { Branch } from '@interfaces/branches.interface';
 import { BranchModel } from '@models/branches.model';
-import { Types } from 'mongoose';
 import { UserModel } from '@/models/users.model';
 
 @Service()
@@ -21,7 +20,7 @@ export class BranchService {
 
   public async createBranch(branchData: Branch): Promise<Branch> {
     const findBranch: Branch = await BranchModel.findOne({ name: branchData.name });
-    if (findBranch) throw new HttpException(409, `This name ${branchData.name} already exists`);
+    if (findBranch) throw new HttpException(409, `A branch with the name ${branchData.name} already exists`);
 
     const createBranchData: Branch = await BranchModel.create({ ...branchData });
 
