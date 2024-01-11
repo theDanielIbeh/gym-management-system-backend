@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { BranchController } from '@controllers/branches.controller';
-import { AddStaffDto, AssignBranchDto, CreateBranchDto } from '@dtos/branches.dto';
+import { AddStaffDto, AddUserDto, AssignBranchDto, CreateBranchDto } from '@dtos/branches.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 import { checkSuperAdminRole } from '@/middlewares/superadmin.middleware';
@@ -25,6 +25,7 @@ export class BranchRoute implements Routes {
       this.branch.updateBranchWithAdmin,
     );
     this.router.put(`${this.path}/add-staff/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(AddStaffDto), this.branch.addStaffToBranch);
+    this.router.put(`${this.path}/add-user/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(AddUserDto), this.branch.addUserToBranch);
     this.router.put(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(CreateBranchDto, true), this.branch.updateBranch);
     this.router.delete(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), this.branch.deleteBranch);
   }
