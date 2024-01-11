@@ -29,6 +29,11 @@ export class CreateBranchDto {
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
+  public instructors: string[];
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
   public staff: string[];
 
   @IsArray()
@@ -50,6 +55,12 @@ export class AddStaffDto {
 }
 
 export class AddUserDto {
+  @IsString()
+  @IsNotEmpty()
+  public user_id: string;
+}
+
+export class AddInstructorDto {
   @IsString()
   @IsNotEmpty()
   public user_id: string;
