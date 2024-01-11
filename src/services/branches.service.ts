@@ -7,12 +7,12 @@ import { UserModel } from '@/models/users.model';
 @Service()
 export class BranchService {
   public async findAllBranches(): Promise<Branch[]> {
-    const branchs: Branch[] = await BranchModel.find().populate('admin').populate('staff').populate('users');
+    const branchs: Branch[] = await BranchModel.find().populate('admin').populate('staff').populate('users').populate('instructors');
     return branchs;
   }
 
   public async findBranchById(branchId: string): Promise<Branch> {
-    const findBranch: Branch = (await BranchModel.findOne({ _id: branchId }).populate('admin').populate('users'));
+    const findBranch: Branch = (await BranchModel.findOne({ _id: branchId }).populate('admin').populate('users').populate('instructors'));
     if (!findBranch) throw new HttpException(409, "Branch doesn't exist");
 
     return findBranch;
@@ -93,12 +93,35 @@ export class BranchService {
     if (user.role !== 'User') {
       throw new HttpException(409, 'User is not a User Member');
     }
-    // Append the user to the staff array of the branch
+    // Append the user to the user array of the branch
     const updatedBranch: Branch = await BranchModel.findByIdAndUpdate(
       branchId,
       { $addToSet: { users: userId } }, // This adds the user member without duplicating if they're already in the array
       { new: true },
     ).populate('users');
+
+    if (!updatedBranch) {
+      throw new HttpException(409, "Branch doesn't exist");
+    }
+
+    return updatedBranch;
+  }
+
+  public async addInstructorToBranch(branchId: string, userId: string): Promise<Branch> {
+    // Check if the user exists (and optionally check for appropriate role)
+    const user = await UserModel.findById(userId /*, { role: 'user' } */);
+    if (!user) {
+      throw new HttpException(409, 'User does not exist');
+    }
+    if (user.role !== 'Instructor') {
+      throw new HttpException(409, 'User is not an Instructor');
+    }
+    // Append the user to the instructors array of the branch
+    const updatedBranch: Branch = await BranchModel.findByIdAndUpdate(
+      branchId,
+      { $addToSet: { instructors: userId } }, // This adds the instructor without duplicating if they're already in the array
+      { new: true },
+    ).populate('instructors');
 
     if (!updatedBranch) {
       throw new HttpException(409, "Branch doesn't exist");
