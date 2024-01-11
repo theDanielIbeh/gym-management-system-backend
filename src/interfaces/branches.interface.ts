@@ -6,6 +6,7 @@ export interface Branch {
   location: string;
   admin: User;
   users: User[];
+  instructors: User[];
   equipment: string[];
   utility_cost: number;
   staff: User[];
