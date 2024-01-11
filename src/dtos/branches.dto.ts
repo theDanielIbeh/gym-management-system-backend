@@ -48,3 +48,9 @@ export class AddStaffDto {
   @IsNotEmpty()
   public user_id: string;
 }
+
+export class AddUserDto {
+  @IsString()
+  @IsNotEmpty()
+  public user_id: string;
+}
