@@ -20,6 +20,12 @@ const BranchSchema: Schema = new Schema({
       ref: 'User',
     },
   ],
+  instructors: [
+    {
+      type: Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   equipment: {
     type: [String],
   },
