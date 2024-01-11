@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
 import { Branch } from '@interfaces/branches.interface';
 import { BranchService } from '@services/branches.service';
-import { AddStaffDto, AssignBranchDto } from '@/dtos/branches.dto';
+import { AddStaffDto, AddUserDto, AssignBranchDto } from '@/dtos/branches.dto';
 
 export class BranchController {
   public branch = Container.get(BranchService);
@@ -72,6 +72,20 @@ export class BranchController {
       const userId: string = addStaffDto.user_id;
 
       const updateBranchData: Branch = await this.branch.addStaffToBranch(branchId, userId);
+
+      res.status(200).json({ data: updateBranchData, message: 'updated' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public addUserToBranch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const branchId: string = req.params.id;
+      const addUserDto: AddUserDto = req.body;
+      const userId: string = addUserDto.user_id;
+
+      const updateBranchData: Branch = await this.branch.addUserToBranch(branchId, userId);
 
       res.status(200).json({ data: updateBranchData, message: 'updated' });
     } catch (error) {
