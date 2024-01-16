@@ -26,7 +26,12 @@ export class BranchRoute implements Routes {
     );
     this.router.put(`${this.path}/add-staff/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(AddStaffDto), this.branch.addStaffToBranch);
     this.router.put(`${this.path}/add-user/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(AddUserDto), this.branch.addUserToBranch);
-    this.router.put(`${this.path}/add-instructor/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(AddInstructorDto), this.branch.addInstructorToBranch);
+    this.router.put(
+      `${this.path}/add-instructor/:id`,
+      checkSuperAdminRole('Superadmin'),
+      ValidationMiddleware(AddInstructorDto),
+      this.branch.addInstructorToBranch,
+    );
     this.router.put(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), ValidationMiddleware(CreateBranchDto, true), this.branch.updateBranch);
     this.router.delete(`${this.path}/:id`, checkSuperAdminRole('Superadmin'), this.branch.deleteBranch);
   }
